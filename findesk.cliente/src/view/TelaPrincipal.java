@@ -5,19 +5,17 @@
  */
 package view;
 import control.Usuario;
-import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import model.SGBD;
-import java.awt.Point;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import model.*;
+import view.BuscaUser;
 
 
 /**
@@ -34,7 +32,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private static DefaultComboBoxModel defaultComboBoxNumero = new DefaultComboBoxModel();
     private static DefaultComboBoxModel defaultComboBoxNome = new DefaultComboBoxModel();
     private static TelaPrincipal janelaControl;
-    private static Point point = new Point();
 
     /**
      * Creates new form TelaPrincipal
@@ -50,9 +47,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         //popularComboBoxNome();
         //this.defaultComboBoxNome ;
         hideComponents();
-        jButtonConfirmar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButtonConfirmar.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/LupaPreta.png")));
     }
     
 
@@ -65,7 +59,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelFundo = new javax.swing.JPanel();
+        jLabelConfirmar = new javax.swing.JLabel();
         jButtonConfirmar = new javax.swing.JButton();
         jComboBoxCategoria = new javax.swing.JComboBox<>();
         jLabelTitulo = new javax.swing.JLabel();
@@ -78,224 +72,125 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jComboBoxNome = new javax.swing.JComboBox<>();
         jLabelCor = new javax.swing.JLabel();
         jLabelNome = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabelLogoFindesk = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        jButtonFechar = new javax.swing.JButton();
-        jButtonMinimizar = new javax.swing.JButton();
+        jLabelFundo = new javax.swing.JLabel();
+        jLabelTitulo1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Findesk");
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
-        jPanelFundo.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelFundo.setPreferredSize(new java.awt.Dimension(800, 600));
-        jPanelFundo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanelFundoMouseDragged(evt);
-            }
-        });
-        jPanelFundo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanelFundoMousePressed(evt);
-            }
-        });
-        jPanelFundo.setLayout(null);
+        jLabelConfirmar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelConfirmar.setText("Vai!!");
+        getContentPane().add(jLabelConfirmar);
+        jLabelConfirmar.setBounds(380, 470, 40, 20);
 
-        jButtonConfirmar.setBackground(new java.awt.Color(255, 255, 255));
-        jButtonConfirmar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/LupaPreta.png"))); // NOI18N
-        jButtonConfirmar.setText("Vai!");
-        jButtonConfirmar.setToolTipText("Ir para a tela de seleção de itens.");
+        jButtonConfirmar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/bt2.png"))); // NOI18N
         jButtonConfirmar.setContentAreaFilled(false);
-        jButtonConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonConfirmarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonConfirmarMouseExited(evt);
-            }
-        });
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jButtonConfirmar);
-        jButtonConfirmar.setBounds(350, 400, 120, 70);
+        getContentPane().add(jButtonConfirmar);
+        jButtonConfirmar.setBounds(340, 450, 120, 70);
 
         jComboBoxCategoria.setModel(defaultComboBoxCategoria);
         jComboBoxCategoria.setSelectedItem(jComboBoxCategoria);
-        jComboBoxCategoria.setToolTipText("Escolha a categoria ao qual seu item se encaixa.");
-        jComboBoxCategoria.setAutoscrolls(true);
-        jComboBoxCategoria.setBorder(null);
-        jComboBoxCategoria.setRequestFocusEnabled(false);
         jComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCategoriaActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jComboBoxCategoria);
-        jComboBoxCategoria.setBounds(350, 200, 110, 26);
+        getContentPane().add(jComboBoxCategoria);
+        jComboBoxCategoria.setBounds(350, 200, 110, 20);
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabelTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTitulo.setText("Buscar");
-        jPanelFundo.add(jLabelTitulo);
-        jLabelTitulo.setBounds(350, 120, 120, 70);
+        getContentPane().add(jLabelTitulo);
+        jLabelTitulo.setBounds(350, 110, 120, 70);
 
-        jLabelComboBoxCategoria.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelComboBoxCategoria.setForeground(new java.awt.Color(255, 255, 255));
         jLabelComboBoxCategoria.setText("*Selecionar Categoria");
-        jPanelFundo.add(jLabelComboBoxCategoria);
+        getContentPane().add(jLabelComboBoxCategoria);
         jLabelComboBoxCategoria.setBounds(210, 200, 140, 20);
 
         jComboBoxDiaInicial.setModel(defaultComboBoxDiaInicial);
-        jComboBoxDiaInicial.setToolTipText("Possível dia da perda ou esquecimento do item.");
-        jComboBoxDiaInicial.setAutoscrolls(true);
-        jComboBoxDiaInicial.setBorder(null);
-        jComboBoxDiaInicial.setRequestFocusEnabled(false);
         jComboBoxDiaInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxDiaInicialActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jComboBoxDiaInicial);
-        jComboBoxDiaInicial.setBounds(350, 250, 70, 26);
+        getContentPane().add(jComboBoxDiaInicial);
+        jComboBoxDiaInicial.setBounds(350, 250, 70, 20);
 
-        jLabelDataInicial.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelDataInicial.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDataInicial.setText("*Data de busca inicial ");
-        jPanelFundo.add(jLabelDataInicial);
-        jLabelDataInicial.setBounds(210, 250, 130, 16);
+        getContentPane().add(jLabelDataInicial);
+        jLabelDataInicial.setBounds(210, 250, 130, 14);
 
         jComboBoxMesInicial.setModel(defaultComboBoxMesInicial);
-        jComboBoxMesInicial.setToolTipText("Possível mês da perda ou esquecimento do item.");
-        jComboBoxMesInicial.setAutoscrolls(true);
-        jComboBoxMesInicial.setBorder(null);
-        jComboBoxMesInicial.setRequestFocusEnabled(false);
         jComboBoxMesInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxMesInicialActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jComboBoxMesInicial);
-        jComboBoxMesInicial.setBounds(430, 250, 70, 26);
+        getContentPane().add(jComboBoxMesInicial);
+        jComboBoxMesInicial.setBounds(430, 250, 70, 20);
 
         jComboBoxAnoInicial.setModel(defaultComboBoxAnoInicial);
-        jComboBoxAnoInicial.setToolTipText("Possível ano da perda ou esquecimento do item.");
-        jComboBoxAnoInicial.setAutoscrolls(true);
-        jComboBoxAnoInicial.setBorder(null);
-        jComboBoxAnoInicial.setRequestFocusEnabled(false);
         jComboBoxAnoInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxAnoInicialActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jComboBoxAnoInicial);
-        jComboBoxAnoInicial.setBounds(510, 250, 110, 26);
+        getContentPane().add(jComboBoxAnoInicial);
+        jComboBoxAnoInicial.setBounds(510, 250, 110, 20);
 
         jComboBoxCor.setModel(defaultComboBoxCor);
-        jComboBoxCor.setToolTipText("Selecione a cor do item desejado.");
-        jComboBoxCor.setAutoscrolls(true);
-        jComboBoxCor.setBorder(null);
-        jComboBoxCor.setRequestFocusEnabled(false);
         jComboBoxCor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCorActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jComboBoxCor);
-        jComboBoxCor.setBounds(350, 330, 110, 26);
+        getContentPane().add(jComboBoxCor);
+        jComboBoxCor.setBounds(350, 330, 110, 20);
 
         jComboBoxNome.setModel(defaultComboBoxNome);
-        jComboBoxNome.setToolTipText("Selecione o nome do item desejado.");
-        jComboBoxNome.setAutoscrolls(true);
-        jComboBoxNome.setBorder(null);
-        jComboBoxNome.setRequestFocusEnabled(false);
         jComboBoxNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxNomeActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jComboBoxNome);
-        jComboBoxNome.setBounds(350, 290, 110, 26);
+        getContentPane().add(jComboBoxNome);
+        jComboBoxNome.setBounds(350, 290, 110, 20);
 
-        jLabelCor.setBackground(new java.awt.Color(0, 0, 0));
-        jLabelCor.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelCor.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCor.setText("*Cor do item");
-        jPanelFundo.add(jLabelCor);
-        jLabelCor.setBounds(210, 330, 110, 16);
+        getContentPane().add(jLabelCor);
+        jLabelCor.setBounds(210, 330, 110, 14);
 
-        jLabelNome.setBackground(new java.awt.Color(0, 0, 0));
-        jLabelNome.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelNome.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNome.setText("*Nome do item");
-        jPanelFundo.add(jLabelNome);
-        jLabelNome.setBounds(210, 290, 110, 16);
-        jPanelFundo.add(jSeparator1);
-        jSeparator1.setBounds(0, 110, 800, 20);
+        getContentPane().add(jLabelNome);
+        jLabelNome.setBounds(210, 290, 110, 14);
 
-        jLabelLogoFindesk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FINDESK_LOGO3_Azul_PNG.png"))); // NOI18N
-        jLabelLogoFindesk.setToolTipText("Abrir site.");
-        jLabelLogoFindesk.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelLogoFindeskMouseClicked(evt);
-            }
-        });
-        jPanelFundo.add(jLabelLogoFindesk);
-        jLabelLogoFindesk.setBounds(-40, -10, 350, 110);
+        jLabelFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/Fundo2.png"))); // NOI18N
+        jLabelFundo.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/Fundo2.png"))); // NOI18N
+        jLabelFundo.setEnabled(false);
+        getContentPane().add(jLabelFundo);
+        jLabelFundo.setBounds(0, 0, 800, 600);
 
-        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
-        jPanelFundo.add(jSeparator2);
-        jSeparator2.setBounds(0, 510, 800, 30);
+        jLabelTitulo1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabelTitulo1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo1.setText("Buscar");
+        getContentPane().add(jLabelTitulo1);
+        jLabelTitulo1.setBounds(350, 110, 120, 70);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/SWS3.png"))); // NOI18N
-        jLabel1.setToolTipText("Smart Way Software.");
-        jPanelFundo.add(jLabel1);
-        jLabel1.setBounds(690, 510, 170, 220);
-
-        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FecharPreto.png"))); // NOI18N
-        jButtonFechar.setToolTipText("Fechar");
-        jButtonFechar.setBorderPainted(false);
-        jButtonFechar.setContentAreaFilled(false);
-        jButtonFechar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonFecharMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonFecharMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonFecharMouseExited(evt);
-            }
-        });
-        jPanelFundo.add(jButtonFechar);
-        jButtonFechar.setBounds(760, 0, 20, 30);
-
-        jButtonMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/MinimizarPreto.png"))); // NOI18N
-        jButtonMinimizar.setToolTipText("Minimizar");
-        jButtonMinimizar.setBorderPainted(false);
-        jButtonMinimizar.setContentAreaFilled(false);
-        jButtonMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonMinimizarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonMinimizarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonMinimizarMouseExited(evt);
-            }
-        });
-        jPanelFundo.add(jButtonMinimizar);
-        jButtonMinimizar.setBounds(700, 0, 40, 30);
-
-        getContentPane().add(jPanelFundo);
-        jPanelFundo.setBounds(0, 0, 800, 600);
-
-        pack();
+        setSize(new java.awt.Dimension(800, 600));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -430,63 +325,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         if(estaMarcado("Nome")) showComponents("Cor");
     }//GEN-LAST:event_jComboBoxNomeActionPerformed
 
-    private void jButtonFecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jButtonFecharMouseClicked
-
-    private void jButtonMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMinimizarMouseClicked
-        janelaControl.setExtendedState(janelaControl.ICONIFIED);
-    }//GEN-LAST:event_jButtonMinimizarMouseClicked
-
-    private void jButtonFecharMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseEntered
-        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FecharAzul.png")));
-    }//GEN-LAST:event_jButtonFecharMouseEntered
-
-    private void jButtonFecharMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseExited
-        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FecharPreto.png")));
-    }//GEN-LAST:event_jButtonFecharMouseExited
-
-    private void jButtonConfirmarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseEntered
-        jButtonConfirmar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(000, 191, 255)));
-        jButtonConfirmar.setForeground(new java.awt.Color(000, 191, 255));
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/LupaAzul.png")));
-    }//GEN-LAST:event_jButtonConfirmarMouseEntered
-
-    private void jButtonConfirmarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseExited
-        jButtonConfirmar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButtonConfirmar.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/LupaPreta.png")));
-    }//GEN-LAST:event_jButtonConfirmarMouseExited
-
-    private void jPanelFundoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelFundoMousePressed
-        point.x = evt.getX();
-        point.y = evt.getY();
-    }//GEN-LAST:event_jPanelFundoMousePressed
-
-    private void jPanelFundoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelFundoMouseDragged
-        Point p = janelaControl.getLocation();
-        janelaControl.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
-    }//GEN-LAST:event_jPanelFundoMouseDragged
-
-    private void jButtonMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMinimizarMouseEntered
-       jButtonMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/MinimizarAzul.png")));
-    }//GEN-LAST:event_jButtonMinimizarMouseEntered
-
-    private void jButtonMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMinimizarMouseExited
-        jButtonMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/MinimizarPreto.png")));
-    }//GEN-LAST:event_jButtonMinimizarMouseExited
-
-    private void jLabelLogoFindeskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogoFindeskMouseClicked
-
-        try {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI("http://www.google.com.br"));
-        } catch (URISyntaxException | IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-    }//GEN-LAST:event_jLabelLogoFindeskMouseClicked
-    
-
     /**
      * @param args the command line arguments
      */
@@ -520,13 +358,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 TelaPrincipal janela =  new TelaPrincipal();
                 janelaControl = janela;
                 janela.setVisible(true);
-                
             }
         });
-        
     }
     
-
     public static void ocultar(){
          janelaControl.setVisible(false);
     }
@@ -549,6 +384,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabelNome.hide();
         jComboBoxNome.hide();
         
+        jLabelConfirmar.hide();
         jButtonConfirmar.hide();
     }
     
@@ -579,6 +415,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jComboBoxNome.show();
             break;
             case "jButtonConfirmar":
+                jLabelConfirmar.show();
                 jButtonConfirmar.show();
             break;
         }
@@ -631,11 +468,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+        }
+        
         defaultComboBoxCategoria = new DefaultComboBoxModel(strList.toArray());
-        jComboBoxCategoria.setRenderer(new MyCellRender(000,191,255));
-        jComboBoxCategoria.setBackground(Color.white);
- 
+        
+        
         mybd.fecharConexao();
         
     }
@@ -664,8 +501,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
         
         defaultComboBoxDiaInicial = new DefaultComboBoxModel(strList.toArray());
-        jComboBoxDiaInicial.setRenderer(new MyCellRender(000,191,255));
-        jComboBoxDiaInicial.setBackground(Color.white);
+        
         
         
         mybd.fecharConexao();
@@ -698,8 +534,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
         
         defaultComboBoxMesInicial = new DefaultComboBoxModel(strList.toArray());
-        jComboBoxMesInicial.setRenderer(new MyCellRender(000,191,255));
-        jComboBoxMesInicial.setBackground(Color.white);
+        
         
         mybd.fecharConexao();
         
@@ -729,8 +564,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
         
         defaultComboBoxAnoInicial = new DefaultComboBoxModel(strList.toArray());
-        jComboBoxAnoInicial.setRenderer(new MyCellRender(000,191,255));
-        jComboBoxAnoInicial.setBackground(Color.white);
+       
+        
         
         mybd.fecharConexao();
         
@@ -755,18 +590,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             rs.beforeFirst();
             while(rs.next()){
                 nome = rs.getString("nomeCor");
-                if(!nome.equals("Nulo")){
-                    strList.add(nome);
-                }
-                
+                strList.add(nome);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         defaultComboBoxCor = new DefaultComboBoxModel(strList.toArray());
-        jComboBoxCor.setRenderer(new MyCellRender(000,191,255));
-        jComboBoxCor.setBackground(Color.white);
+        
+        
         
         mybd.fecharConexao();
         
@@ -831,8 +663,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
         
         defaultComboBoxNome = new DefaultComboBoxModel(strList.toArray());
-        jComboBoxNome.setRenderer(new MyCellRender(000,191,255));
-        jComboBoxNome.setBackground(Color.white);
         
         mybd.fecharConexao();
         
@@ -840,23 +670,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JButton jButtonFechar;
-    private javax.swing.JButton jButtonMinimizar;
-    private static javax.swing.JComboBox<String> jComboBoxAnoInicial;
-    private static javax.swing.JComboBox<String> jComboBoxCategoria;
-    private static javax.swing.JComboBox<String> jComboBoxCor;
-    private static javax.swing.JComboBox<String> jComboBoxDiaInicial;
-    private static javax.swing.JComboBox<String> jComboBoxMesInicial;
-    private static javax.swing.JComboBox<String> jComboBoxNome;
-    private javax.swing.JLabel jLabel1;
-    private static javax.swing.JLabel jLabelComboBoxCategoria;
+    private javax.swing.JComboBox<String> jComboBoxAnoInicial;
+    private javax.swing.JComboBox<String> jComboBoxCategoria;
+    private javax.swing.JComboBox<String> jComboBoxCor;
+    private javax.swing.JComboBox<String> jComboBoxDiaInicial;
+    private javax.swing.JComboBox<String> jComboBoxMesInicial;
+    private javax.swing.JComboBox<String> jComboBoxNome;
+    private javax.swing.JLabel jLabelComboBoxCategoria;
+    private javax.swing.JLabel jLabelConfirmar;
     private javax.swing.JLabel jLabelCor;
     private javax.swing.JLabel jLabelDataInicial;
-    private javax.swing.JLabel jLabelLogoFindesk;
+    private javax.swing.JLabel jLabelFundo;
     private javax.swing.JLabel jLabelNome;
-    private static javax.swing.JLabel jLabelTitulo;
-    private javax.swing.JPanel jPanelFundo;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelTitulo1;
     // End of variables declaration//GEN-END:variables
 }
