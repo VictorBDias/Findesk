@@ -5,13 +5,11 @@
  */
 package model;
 
-import java.io.Serializable;
-
 /**
  *
  * @author ld_si
  */
-public class Ano implements Serializable{
+public class Ano {
     private int idAno;
 
     public Ano(int idAno) {

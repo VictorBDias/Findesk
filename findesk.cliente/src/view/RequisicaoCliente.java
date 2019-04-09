@@ -7,16 +7,10 @@ package view;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import model.Item;
 import model.SGBD;
 import model.Sockets;
@@ -26,12 +20,9 @@ import model.Sockets;
  * @author pedro
  */
 public class RequisicaoCliente extends javax.swing.JFrame {
-
     private static RequisicaoCliente janelaControl;
     private static BuscaUser janelaControlBusca;
     private Item item;
-    private static Point point = new Point();
-
     /**
      * Creates new form RequisicaoCliente
      */
@@ -39,7 +30,7 @@ public class RequisicaoCliente extends javax.swing.JFrame {
         initComponents();
         load(itemSelecionado);
     }
-
+    
     public RequisicaoCliente() {
         initComponents();
     }
@@ -53,9 +44,11 @@ public class RequisicaoCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabelLogoFindesk = new javax.swing.JLabel();
         JButtonConfirmar = new javax.swing.JButton();
+        JTFDocumento = new javax.swing.JTextField();
+        JLabelNumero = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabelTipo = new javax.swing.JLabel();
         jLabelTitulo = new javax.swing.JLabel();
         jButtonVoltar = new javax.swing.JButton();
         jScrollPaneDescricao = new javax.swing.JScrollPane();
@@ -63,170 +56,89 @@ public class RequisicaoCliente extends javax.swing.JFrame {
         jLabelId = new javax.swing.JLabel();
         jLabelNome = new javax.swing.JLabel();
         jLabelCor = new javax.swing.JLabel();
+        jLabelFoto = new javax.swing.JLabel();
         jLabelData = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        jButtonMinimizar = new javax.swing.JButton();
-        jButtonFechar = new javax.swing.JButton();
-        jLabelDescricao = new javax.swing.JLabel();
+        jLabelFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanel1MouseDragged(evt);
-            }
-        });
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel1MousePressed(evt);
-            }
-        });
-        jPanel1.setLayout(null);
-
-        jLabelLogoFindesk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FINDESK_LOGO3_Azul_PNG.png"))); // NOI18N
-        jPanel1.add(jLabelLogoFindesk);
-        jLabelLogoFindesk.setBounds(-40, -10, 350, 110);
-
-        JButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/selecionadoPreto.png"))); // NOI18N
         JButtonConfirmar.setText("Confirmar");
-        JButtonConfirmar.setToolTipText("Confirmar pedido de retirada.");
-        JButtonConfirmar.setContentAreaFilled(false);
-        JButtonConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                JButtonConfirmarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                JButtonConfirmarMouseExited(evt);
-            }
-        });
         JButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JButtonConfirmarActionPerformed(evt);
             }
         });
-        jPanel1.add(JButtonConfirmar);
-        JButtonConfirmar.setBounds(600, 520, 130, 30);
+        getContentPane().add(JButtonConfirmar);
+        JButtonConfirmar.setBounds(470, 490, 100, 23);
+        getContentPane().add(JTFDocumento);
+        JTFDocumento.setBounds(410, 250, 100, 20);
+
+        JLabelNumero.setForeground(new java.awt.Color(255, 255, 255));
+        JLabelNumero.setText("Nº documento");
+        getContentPane().add(JLabelNumero);
+        JLabelNumero.setBounds(290, 250, 80, 14);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RA", "SIAPE", "RG", " " }));
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(410, 220, 56, 20);
+
+        jLabelTipo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTipo.setText("Tipo de Documento");
+        getContentPane().add(jLabelTipo);
+        jLabelTipo.setBounds(290, 220, 110, 14);
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabelTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTitulo.setText("Requerimento");
-        jPanel1.add(jLabelTitulo);
-        jLabelTitulo.setBounds(20, 120, 230, 60);
+        getContentPane().add(jLabelTitulo);
+        jLabelTitulo.setBounds(280, 140, 230, 60);
 
-        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/VoltarPreto.png"))); // NOI18N
         jButtonVoltar.setText("Voltar");
-        jButtonVoltar.setToolTipText("Voltar para a tela de busca.");
-        jButtonVoltar.setContentAreaFilled(false);
-        jButtonVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonVoltarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonVoltarMouseExited(evt);
-            }
-        });
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVoltarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVoltar);
-        jButtonVoltar.setBounds(10, 520, 130, 30);
+        getContentPane().add(jButtonVoltar);
+        jButtonVoltar.setBounds(240, 490, 100, 23);
 
-        jTextDescricao.setEditable(false);
         jTextDescricao.setColumns(20);
         jTextDescricao.setRows(5);
-        jTextDescricao.setToolTipText("Descrição do item.");
-        jTextDescricao.setRequestFocusEnabled(false);
         jScrollPaneDescricao.setViewportView(jTextDescricao);
 
-        jPanel1.add(jScrollPaneDescricao);
-        jScrollPaneDescricao.setBounds(20, 330, 760, 170);
+        getContentPane().add(jScrollPaneDescricao);
+        jScrollPaneDescricao.setBounds(220, 390, 380, 70);
 
-        jLabelId.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelId.setForeground(new java.awt.Color(255, 255, 255));
         jLabelId.setText("ID:");
-        jPanel1.add(jLabelId);
-        jLabelId.setBounds(20, 190, 230, 16);
+        getContentPane().add(jLabelId);
+        jLabelId.setBounds(220, 290, 220, 14);
 
-        jLabelNome.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelNome.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNome.setText("Nome:");
-        jPanel1.add(jLabelNome);
-        jLabelNome.setBounds(20, 220, 220, 16);
+        getContentPane().add(jLabelNome);
+        jLabelNome.setBounds(220, 310, 220, 14);
 
-        jLabelCor.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelCor.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCor.setText("Cor:");
-        jPanel1.add(jLabelCor);
-        jLabelCor.setBounds(20, 250, 230, 16);
+        getContentPane().add(jLabelCor);
+        jLabelCor.setBounds(220, 330, 220, 14);
+        getContentPane().add(jLabelFoto);
+        jLabelFoto.setBounds(470, 290, 130, 90);
 
-        jLabelData.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelData.setForeground(new java.awt.Color(255, 255, 255));
         jLabelData.setText("Data:");
-        jPanel1.add(jLabelData);
-        jLabelData.setBounds(20, 280, 220, 16);
-        jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(0, 110, 800, 20);
+        getContentPane().add(jLabelData);
+        jLabelData.setBounds(220, 350, 210, 14);
 
-        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
-        jPanel1.add(jSeparator2);
-        jSeparator2.setBounds(0, 510, 800, 30);
+        jLabelFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/Fundo2.png"))); // NOI18N
+        getContentPane().add(jLabelFundo);
+        jLabelFundo.setBounds(0, -10, 800, 620);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/SWS3.png"))); // NOI18N
-        jLabel1.setToolTipText("Smart Way Sofware.");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(690, 510, 170, 220);
-
-        jButtonMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/MinimizarPreto.png"))); // NOI18N
-        jButtonMinimizar.setToolTipText("Minimizar");
-        jButtonMinimizar.setBorderPainted(false);
-        jButtonMinimizar.setContentAreaFilled(false);
-        jButtonMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonMinimizarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonMinimizarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonMinimizarMouseExited(evt);
-            }
-        });
-        jPanel1.add(jButtonMinimizar);
-        jButtonMinimizar.setBounds(700, 0, 40, 30);
-
-        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FecharPreto.png"))); // NOI18N
-        jButtonFechar.setToolTipText("Fechar");
-        jButtonFechar.setBorderPainted(false);
-        jButtonFechar.setContentAreaFilled(false);
-        jButtonFechar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonFecharMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonFecharMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonFecharMouseExited(evt);
-            }
-        });
-        jPanel1.add(jButtonFechar);
-        jButtonFechar.setBounds(760, 0, 20, 30);
-
-        jLabelDescricao.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelDescricao.setText("Descrição:");
-        jPanel1.add(jLabelDescricao);
-        jLabelDescricao.setBounds(20, 310, 90, 16);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 800, 600);
-
-        pack();
+        setSize(new java.awt.Dimension(800, 600));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -237,85 +149,15 @@ public class RequisicaoCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void JButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonConfirmarActionPerformed
-        try {
-            Socket destino = new Socket("192.168.100.43", 5060);
-            Sockets.sendItem(destino, item);
-            String msg = Sockets.receiveText(destino);
-            SGBD mybd = new SGBD();
-            if(msg.equals("Aceito")){
-                
-                mybd.retirarItem(item.getIdItem(), 1);
-                mybd.fecharConexao();
-                JOptionPane.showMessageDialog(rootPane, "Mensagem: "+msg);
-                System.out.println("Recebido : "+ msg);
-            }
-            if(msg.equals("Negado")){
-                mybd.retirarItem(item.getIdItem(), 0);
-                mybd.fecharConexao();
-                JOptionPane.showMessageDialog(rootPane, "Mensagem: "+msg);
-                System.out.println("Recebido : "+ msg);
-            }
-            
-
-        } catch (IOException ex) {
-            Logger.getLogger(RequisicaoCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+               
+       SGBD mybd = new SGBD();
+       mybd.getConexaoMySQL();
+       
+       Sockets novo = new Sockets(mybd.loadAdmIp(),mybd.loadAdmPort());
+       novo.testConnection();
+       
+       mybd.fecharConexao();
     }//GEN-LAST:event_JButtonConfirmarActionPerformed
-
-    private void jButtonMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMinimizarMouseClicked
-        janelaControl.setExtendedState(janelaControl.ICONIFIED);
-    }//GEN-LAST:event_jButtonMinimizarMouseClicked
-
-    private void jButtonFecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jButtonFecharMouseClicked
-
-    private void jButtonFecharMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseEntered
-        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FecharAzul.png")));
-    }//GEN-LAST:event_jButtonFecharMouseEntered
-
-    private void jButtonFecharMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseExited
-        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FecharPreto.png")));
-    }//GEN-LAST:event_jButtonFecharMouseExited
-
-    private void jButtonMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMinimizarMouseEntered
-        jButtonMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/MinimizarAzul.png")));
-    }//GEN-LAST:event_jButtonMinimizarMouseEntered
-
-    private void jButtonMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMinimizarMouseExited
-        jButtonMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/MinimizarPreto.png")));
-    }//GEN-LAST:event_jButtonMinimizarMouseExited
-
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        Point p = janelaControl.getLocation();
-        janelaControl.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
-    }//GEN-LAST:event_jPanel1MouseDragged
-
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        point.x = evt.getX();
-        point.y = evt.getY();
-    }//GEN-LAST:event_jPanel1MousePressed
-
-    private void jButtonVoltarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVoltarMouseEntered
-        jButtonVoltar.setForeground(new java.awt.Color(000, 191, 255));
-        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/voltarAzul.png")));
-    }//GEN-LAST:event_jButtonVoltarMouseEntered
-
-    private void jButtonVoltarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVoltarMouseExited
-        jButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/voltarPreto.png")));
-    }//GEN-LAST:event_jButtonVoltarMouseExited
-
-    private void JButtonConfirmarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JButtonConfirmarMouseEntered
-        JButtonConfirmar.setForeground(new java.awt.Color(000, 191, 255));
-        JButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/selecionadoAzul.png")));
-    }//GEN-LAST:event_JButtonConfirmarMouseEntered
-
-    private void JButtonConfirmarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JButtonConfirmarMouseExited
-        JButtonConfirmar.setForeground(new java.awt.Color(0, 0, 0));
-        JButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/selecionadoPreto.png")));
-    }//GEN-LAST:event_JButtonConfirmarMouseExited
 
     /**
      * @param args the command line arguments
@@ -355,7 +197,6 @@ public class RequisicaoCliente extends javax.swing.JFrame {
             }
         });
     }
-
     public static void mostrar(Item itemSelecionado, BuscaUser busca) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -392,57 +233,29 @@ public class RequisicaoCliente extends javax.swing.JFrame {
             }
         });
     }
-
-    private void load(Item itemSelecionado) {
-        System.out.println("Requsição do item: " + itemSelecionado.getIdItem());
-        System.out.println("Número: " + itemSelecionado.getIdDoc());
-        System.out.println("Cor: " + itemSelecionado.getCor());
-        if(itemSelecionado.getIdDoc() == 0){
-            switch(itemSelecionado.getCor()){
-                case "#000000":
-                    jLabelCor.setText("Cor: Preto");
-                break;
-                case "#0000FF":
-                    jLabelCor.setText("Cor: Azul");
-                break;
-                case "#FFFFFF":
-                    jLabelCor.setText("Cor: Branco");
-                break;
-                case "#999999":
-                    jLabelCor.setText("Cor: Sem cor");
-                break;
-                case "#00FF00":
-                    jLabelCor.setText("Cor: Verde");
-                break;
-                case "#FF0000":
-                    jLabelCor.setText("Cor: Vermelho");
-                break;
-            }
-            
-        }else{
-            jLabelCor.setText("Número: " + itemSelecionado.getIdDoc());
-        }
+    
+    private void load(Item itemSelecionado){
+        System.out.println("Requsição do item: "+itemSelecionado.getIdItem());
         this.item = itemSelecionado;
-        jLabelId.setText("ID: " + Integer.toString(itemSelecionado.getIdItem()));
-        jLabelNome.setText("Nome: " + itemSelecionado.getNomeItem());
-        jTextDescricao.setText(itemSelecionado.getDescricaoItem());
-//        jLabelData.setText("Data: " + itemSelecionado.getDataEntrada().getDataEntrada().getIdDia()+"/"+
-//                            itemSelecionado.getDataEntrada().getDataEntrada().getIdMes()+"/"+
-//                               itemSelecionado.getDataEntrada().getDataEntrada().getIdAno());
-        jLabelData.setText("Data: "+itemSelecionado.getDataEntradaString());
+        jLabelId.setText("ID: "+Integer.toString(itemSelecionado.getIdItem()));
+        jLabelNome.setText("Nome: "+itemSelecionado.getNome());
+        jTextDescricao.setText(itemSelecionado.getDescrição());
+        jLabelCor.setText("Cor: "+itemSelecionado.getCor());
+        jLabelData.setText("Data: "+itemSelecionado.getDataEntrada());
+        loadIcon(jLabelFoto, itemSelecionado.getFoto());
     }
-
-    private void loadIcon(JLabel label, String imagem) {
+    
+     private void loadIcon(JLabel label, String imagem){
         //atribui imagem nos labels desejados
-
+        
         ImageIcon icon = new ImageIcon(imagem, "imagem");
         Image img = icon.getImage();
-        Image nova = getScaledImage(img, 200, 150);
+        Image nova = getScaledImage(img, 200,150);
         icon.setImage(nova);
-        label.setIcon(icon);
+        label.setIcon(icon); 
     }
-
-    private Image getScaledImage(Image srcImg, int w, int h) {
+      
+    private Image getScaledImage(Image srcImg, int w, int h){
         //Redimensiona a imagem para o tamanho desejado
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -453,27 +266,25 @@ public class RequisicaoCliente extends javax.swing.JFrame {
 
         return resizedImg;
     }
-
-    public void closeFrame() {
+    
+    public void closeFrame(){
         janelaControl.dispose();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButtonConfirmar;
-    private javax.swing.JButton jButtonFechar;
-    private javax.swing.JButton jButtonMinimizar;
+    private javax.swing.JLabel JLabelNumero;
+    private javax.swing.JTextField JTFDocumento;
     private javax.swing.JButton jButtonVoltar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabelCor;
     private javax.swing.JLabel jLabelData;
-    private javax.swing.JLabel jLabelDescricao;
+    private javax.swing.JLabel jLabelFoto;
+    private javax.swing.JLabel jLabelFundo;
     private javax.swing.JLabel jLabelId;
-    private javax.swing.JLabel jLabelLogoFindesk;
     private javax.swing.JLabel jLabelNome;
+    private javax.swing.JLabel jLabelTipo;
     private javax.swing.JLabel jLabelTitulo;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPaneDescricao;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextDescricao;
     // End of variables declaration//GEN-END:variables
 }

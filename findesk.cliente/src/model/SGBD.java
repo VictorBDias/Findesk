@@ -44,7 +44,7 @@ public class SGBD
     //Método Construtor da Classe//
     
     public SGBD() {
-        this.url = "jdbc:mysql://192.168.100.121:3306/findesk";
+        this.url = "jdbc:mysql://127.0.0.1:3306/findesk";
         this.user = "utfpr";
         this.password = "utfpr";
         
@@ -131,23 +131,23 @@ public class SGBD
     }
      
 
-//    public static void setUserConfig(String ip, int porta) throws ipException{
-//        if(ip.isEmpty()){
-//            throw new ipException();
-//        }else{
-//            try {
-//                Statement stt;
-//                stt = connection.createStatement(); 
-//                stt.executeUpdate("UPDATE userconfig " +
-//                                  "SET ipUserConfig = \""+ip+"\" " +
-//                                  ", portUserConfig = " + porta +
-//                                  " where idUserConfig = 1; ");
-//
-//            } catch (SQLException ex) {
-//                Logger.getLogger(SGBD.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//    }
+    public static void setUserConfig(String ip, int porta) throws ipException{
+        if(ip.isEmpty()){
+            throw new ipException();
+        }else{
+            try {
+                Statement stt;
+                stt = connection.createStatement(); 
+                stt.executeUpdate("UPDATE userconfig " +
+                                  "SET ipUserConfig = \""+ip+"\" " +
+                                  ", portUserConfig = " + porta +
+                                  " where idUserConfig = 1; ");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(SGBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     public static int loadAdmPort(){ 
         try {
             Statement stt;
@@ -211,30 +211,6 @@ public class SGBD
         
     }
     
-    
-    public static void retirarItem(int id, int opt){
-        Statement stt;
-        try {
-            stt = connection.createStatement();
-            String sql = "UPDATE findesk.item SET retiradoItem = '"+opt+"' WHERE (idItem = '"+id+"');";
-            System.out.println("Alterando: "+sql);
-            stt.executeUpdate(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(SGBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public static void retirarItem(){
-        Statement stt;
-        try {
-            stt = connection.createStatement();
-            String sql = "UPDATE findesk.item SET retiradoItem = '1' WHERE (idItem = '2');";
-            System.out.println("Alterando: "+sql);
-            stt.executeUpdate(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(SGBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
  
 }

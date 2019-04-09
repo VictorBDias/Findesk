@@ -5,19 +5,22 @@
  */
 package view;
 import control.Usuario;
+import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.*;
 
@@ -31,7 +34,6 @@ public class BuscaUser extends javax.swing.JFrame {
     private static RequisicaoCliente janelaControlRequerimento = null;
     private  DefaultTableModel defaultTableResultado;
     public Item itemSelecionado = new Item();
-    private static Point point = new Point();
 
     /**
      * Creates new form suaJanela
@@ -39,12 +41,10 @@ public class BuscaUser extends javax.swing.JFrame {
     public BuscaUser(String resultado) {
         initComponents();
         popular(resultado);
-        jButtonConfirmar.hide();
     }
     public BuscaUser() {
         initComponents();
         popular();
-        jButtonConfirmar.hide();
     }
 
     /**
@@ -56,29 +56,36 @@ public class BuscaUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonVoltar = new javax.swing.JButton();
+        jLabelTitulo = new javax.swing.JLabel();
         jScrollPaneResultado = new javax.swing.JScrollPane();
         jTableResultado = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabelTitulo = new javax.swing.JLabel();
-        jLabelFoto = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabelLogoFindesk = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         jButtonConfirmar = new javax.swing.JButton();
-        jButtonVoltar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButtonMinimizar = new javax.swing.JButton();
-        jButtonFechar = new javax.swing.JButton();
+        jLabelFoto = new javax.swing.JLabel();
+        jLabelFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setMaximumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
-        jTableResultado.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonVoltar);
+        jButtonVoltar.setBounds(70, 530, 61, 23);
+
+        jLabelTitulo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo.setText("Busca ");
+        getContentPane().add(jLabelTitulo);
+        jLabelTitulo.setBounds(340, 30, 110, 70);
+
         jTableResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -102,8 +109,6 @@ public class BuscaUser extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableResultado.setRequestFocusEnabled(false);
-        jTableResultado.setSelectionBackground(new java.awt.Color(0, 191, 255));
         jTableResultado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableResultadoMouseClicked(evt);
@@ -112,128 +117,29 @@ public class BuscaUser extends javax.swing.JFrame {
         jScrollPaneResultado.setViewportView(jTableResultado);
 
         getContentPane().add(jScrollPaneResultado);
-        jScrollPaneResultado.setBounds(0, 312, 800, 190);
+        jScrollPaneResultado.setBounds(60, 312, 680, 190);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanel1MouseDragged(evt);
-            }
-        });
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel1MousePressed(evt);
-            }
-        });
-        jPanel1.setLayout(null);
-
-        jLabelTitulo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabelTitulo.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelTitulo.setText("Busca ");
-        jPanel1.add(jLabelTitulo);
-        jLabelTitulo.setBounds(20, 120, 110, 70);
-
-        jLabelFoto.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelFoto.setToolTipText("Imagem do item.");
-        jPanel1.add(jLabelFoto);
-        jLabelFoto.setBounds(240, 120, 310, 180);
-        jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(0, 110, 800, 20);
-
-        jLabelLogoFindesk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FINDESK_LOGO3_Azul_PNG.png"))); // NOI18N
-        jPanel1.add(jLabelLogoFindesk);
-        jLabelLogoFindesk.setBounds(-40, -10, 350, 110);
-
-        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
-        jPanel1.add(jSeparator2);
-        jSeparator2.setBounds(0, 510, 800, 20);
-
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/selecionadoPreto.png"))); // NOI18N
         jButtonConfirmar.setText("Confirmar");
-        jButtonConfirmar.setToolTipText("Confirmar seleção.");
-        jButtonConfirmar.setContentAreaFilled(false);
-        jButtonConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonConfirmarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonConfirmarMouseExited(evt);
-            }
-        });
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonConfirmar);
-        jButtonConfirmar.setBounds(600, 520, 130, 30);
+        getContentPane().add(jButtonConfirmar);
+        jButtonConfirmar.setBounds(640, 530, 100, 23);
 
-        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/VoltarPreto.png"))); // NOI18N
-        jButtonVoltar.setText("Voltar");
-        jButtonVoltar.setToolTipText("Voltar para a tela principal.");
-        jButtonVoltar.setContentAreaFilled(false);
-        jButtonVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonVoltarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonVoltarMouseExited(evt);
-            }
-        });
-        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVoltarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonVoltar);
-        jButtonVoltar.setBounds(10, 520, 130, 30);
+        jLabelFoto.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabelFoto);
+        jLabelFoto.setBounds(210, 100, 370, 200);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/SWS3.png"))); // NOI18N
-        jLabel1.setToolTipText("Smart Way Software.");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(690, 510, 170, 220);
+        jLabelFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/Fundo2.png"))); // NOI18N
+        jLabelFundo.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/Fundo2.png"))); // NOI18N
+        jLabelFundo.setEnabled(false);
+        getContentPane().add(jLabelFundo);
+        jLabelFundo.setBounds(0, 0, 790, 600);
 
-        jButtonMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/MinimizarPreto.png"))); // NOI18N
-        jButtonMinimizar.setToolTipText("Minimizar");
-        jButtonMinimizar.setBorderPainted(false);
-        jButtonMinimizar.setContentAreaFilled(false);
-        jButtonMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonMinimizarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonMinimizarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonMinimizarMouseExited(evt);
-            }
-        });
-        jPanel1.add(jButtonMinimizar);
-        jButtonMinimizar.setBounds(700, 0, 40, 30);
-
-        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FecharPreto.png"))); // NOI18N
-        jButtonFechar.setToolTipText("Fechar");
-        jButtonFechar.setBorderPainted(false);
-        jButtonFechar.setContentAreaFilled(false);
-        jButtonFechar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonFecharMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonFecharMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonFecharMouseExited(evt);
-            }
-        });
-        jPanel1.add(jButtonFechar);
-        jButtonFechar.setBounds(760, 0, 20, 30);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 800, 600);
-
-        pack();
+        setSize(new java.awt.Dimension(800, 600));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -244,14 +150,10 @@ public class BuscaUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        if(jTableResultado.getSelectedRow() != -1){
-            janelaControl.setVisible(false);
-            RequisicaoCliente requerimento = new RequisicaoCliente();
-            requerimento.mostrar(itemSelecionado,janelaControl);
-            janelaControlRequerimento = requerimento;
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Selecione um item primeiro!");
-        }
+        janelaControl.setVisible(false);
+        RequisicaoCliente requerimento = new RequisicaoCliente();
+        requerimento.mostrar(itemSelecionado,janelaControl);
+        janelaControlRequerimento = requerimento;
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jTableResultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableResultadoMouseClicked
@@ -262,67 +164,8 @@ public class BuscaUser extends javax.swing.JFrame {
         if(itemSelecionado.load(id)){
             System.out.println("Item carregado: "+ itemSelecionado.getIdItem());
         }
-        popular(jLabelFoto, itemSelecionado.getFotoItem());
-        if(linha != -1){
-            jButtonConfirmar.show();
-        }else{
-            jButtonConfirmar.hide();
-        }
+        popular(jLabelFoto, itemSelecionado.getFoto());
     }//GEN-LAST:event_jTableResultadoMouseClicked
-
-    private void jButtonMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMinimizarMouseClicked
-        janelaControl.setExtendedState(janelaControl.ICONIFIED);
-    }//GEN-LAST:event_jButtonMinimizarMouseClicked
-
-    private void jButtonFecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jButtonFecharMouseClicked
-
-    private void jButtonFecharMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseEntered
-        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FecharAzul.png")));
-    }//GEN-LAST:event_jButtonFecharMouseEntered
-
-    private void jButtonFecharMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseExited
-        jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/FecharPreto.png")));
-    }//GEN-LAST:event_jButtonFecharMouseExited
-
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        point.x = evt.getX();
-        point.y = evt.getY();
-    }//GEN-LAST:event_jPanel1MousePressed
-
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        Point p = janelaControl.getLocation();
-        janelaControl.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
-    }//GEN-LAST:event_jPanel1MouseDragged
-
-    private void jButtonMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMinimizarMouseEntered
-        jButtonMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/MinimizarAzul.png")));
-    }//GEN-LAST:event_jButtonMinimizarMouseEntered
-
-    private void jButtonMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMinimizarMouseExited
-        jButtonMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/MinimizarPreto.png")));
-    }//GEN-LAST:event_jButtonMinimizarMouseExited
-
-    private void jButtonVoltarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVoltarMouseEntered
-        jButtonVoltar.setForeground(new java.awt.Color(000, 191, 255));
-        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/voltarAzul.png")));
-    }//GEN-LAST:event_jButtonVoltarMouseEntered
-
-    private void jButtonVoltarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVoltarMouseExited
-        jButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/voltarPreto.png")));
-    }//GEN-LAST:event_jButtonVoltarMouseExited
-
-    private void jButtonConfirmarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseEntered
-        jButtonConfirmar.setForeground(new java.awt.Color(000, 191, 255));
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/selecionadoAzul.png")));
-    }//GEN-LAST:event_jButtonConfirmarMouseEntered
-
-    private void jButtonConfirmarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseExited
-        jButtonConfirmar.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/selecionadoPreto.png")));
-    }//GEN-LAST:event_jButtonConfirmarMouseExited
 
     
     public void popular(JLabel label, String imagem){
@@ -379,7 +222,6 @@ public class BuscaUser extends javax.swing.JFrame {
                 BuscaUser buscaUser = new BuscaUser();
                 buscaUser.setVisible(true);
                 janelaControl = buscaUser;
-                
             }
         });
     }
@@ -485,17 +327,11 @@ public class BuscaUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JButton jButtonFechar;
-    private javax.swing.JButton jButtonMinimizar;
     private javax.swing.JButton jButtonVoltar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFoto;
-    private javax.swing.JLabel jLabelLogoFindesk;
+    private javax.swing.JLabel jLabelFundo;
     private javax.swing.JLabel jLabelTitulo;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPaneResultado;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTableResultado;
     // End of variables declaration//GEN-END:variables
 }
